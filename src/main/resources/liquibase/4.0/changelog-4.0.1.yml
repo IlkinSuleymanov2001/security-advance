@@ -1,0 +1,30 @@
+databaseChangeLog:
+  - changeSet:
+      id: create user_permissions table (example date )
+      author: ilkin
+      changes:
+        - createTable:
+            tableName: user_permissions
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: user_id
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: product_name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: permission_name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false

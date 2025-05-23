@@ -1,0 +1,31 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: ilkin suleymanov
+      changes:
+        - createTable:
+            tableName: travels
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: from_date
+                  type: datetime
+                  constraints:
+                    nullable: false
+              - column:
+                  name: country
+                  type: varchar(100)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: to_date
+                  type: datetime
+                  constraints:
+                    nullable: true
+

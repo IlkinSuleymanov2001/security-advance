@@ -1,0 +1,14 @@
+databaseChangeLog:
+  - changeSet:
+      id: user table updated, added birthPlace optional column
+      author: ilkin
+      changes:
+        - addColumn:
+            tableName: users
+            columns:
+              - column:
+                  name: age
+                  type: INT
+                  constraints:
+                    nullable: true
+

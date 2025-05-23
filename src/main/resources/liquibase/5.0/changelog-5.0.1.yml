@@ -1,0 +1,86 @@
+databaseChangeLog:
+  - changeSet:
+      id: create app_domains
+      author: ilkin
+      changes:
+        - createTable:
+            tableName: domain_objects
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: true
+  - changeSet:
+      id: create permissions table
+      author: ilkin
+      changes:
+        - createTable:
+            tableName: security_permissions
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: role_id
+                  type: BIGINT
+                  constraints:
+                    nullable: true
+              - column:
+                  name: domain_id
+                  type: BIGINT
+                  constraints:
+                    nullable: true
+              - column:
+                  name: read
+                  type: boolean
+                  constraints:
+                    nullable: false
+              - column:
+                  name: write
+                  type: boolean
+                  constraints:
+                    nullable: false
+              - column:
+                  name: delete
+                  type: boolean
+                  constraints:
+                    nullable: false
+              - addForeignKeyConstraint:
+                  baseColumnNames: role_id
+                  baseTableName: security_permissions
+                  constraintName: fk_security_permission_roles
+                  deferrable: true
+                  initiallyDeferred: true
+                  onDelete: RESTRICT
+                  onUpdate: RESTRICT
+                  referencedColumnNames: id
+                  referencedTableName: roles
+                  validate: true
+              - addForeignKeyConstraint:
+                  baseColumnNames: domain_id
+                  baseTableName: security_permissions
+                  constraintName: fk_security_permission_domains
+                  deferrable: true
+                  initiallyDeferred: true
+                  onDelete: RESTRICT
+                  onUpdate: RESTRICT
+                  referencedColumnNames: id
+                  referencedTableName: domain_objects
+                  validate: true

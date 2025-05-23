@@ -1,0 +1,58 @@
+databaseChangeLog:
+  - changeSet:
+      id: create guests table
+      author: ilkin
+      changes:
+        - createTable:
+            tableName: guests
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: email
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: phone
+                  type: VARCHAR(50)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: country_code
+                  type: INT
+                  constraints:
+                    nullable: true
+              - column:
+                  name: is_in_travel
+                  type: BOOLEAN
+                  constraints:
+                    nullable: true
+              - column:
+                  name: travel_id
+                  type: INT
+                  constraints:
+                    nullable: true
+        - addForeignKeyConstraint:
+            baseTableName: guests
+            baseColumnNames: travel_id
+            referencedTableName: travels
+            referencedColumnNames: id
+            constraintName: guest_travel_constraint
+            onDelete: CASCADE
+            onInsert: CASCADE
+
+
+
+

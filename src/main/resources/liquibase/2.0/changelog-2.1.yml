@@ -1,0 +1,41 @@
+databaseChangeLog:
+  - changeSet:
+      - id: create  table
+        author: ilkin
+      - createTable:
+          tableName: order_line
+          columns:
+            - column:
+                name: product_id
+                type: bigint
+                constraints:
+                  nullable: false
+            - column:
+                name: order_id
+                type: bigint
+                constraints:
+                  nullable: false
+            - column:
+                name: created_at
+                type: timestamp
+                constraints:
+                defaultValueComputed: CURRENT_TIMESTAMP
+            - addPrimaryKey:
+                tableName: order_line
+                columns:
+                  - product_id
+                  - order_id
+            - addForeignKeyConstraint:
+                baseColumnNames: product_id
+                referencedTableName: products
+                referencedColumnNames: id
+                constraintName: fk_product_order_constraint
+                onDelete: CASCADE
+                onUpdate: CASCADE
+            - addForeignKeyConstraint:
+                baseColumnNames: order_id
+                referencedTableName: orders
+                referencedColumnNames: id
+                constraintName: fk_order_product_constraint
+                onDelete: CASCADE
+                onUpdate: CASCADE

@@ -1,0 +1,79 @@
+databaseChangeLog:
+  - changeSet:
+      id: create card table
+      author: ilkin suleymanov
+      changes:
+        - createTable:
+            tableName: cards
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: cvv
+                  type: varchar(255)
+              - column:
+                  name: place_holder
+                  type: varchar(255)
+              - column:
+                  name: pan
+                  type: varchar(255)
+              - column:
+                  name: pin
+                  type: varbinary(255)
+              - column:
+                  name: card_type
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: balance
+                  type: bigint
+                  defaultValue: 0
+              - column:
+                  name: expiry_date
+                  type: date
+                  constraints:
+                    nullable: true
+              - column:
+                  name: created_at
+                  type: timestamp
+                  constraints:
+                    nullable: false
+              - column:
+                  name: is_block
+                  type: boolean
+                  constraints:
+                    nullable: true
+              - column:
+                  name: is_active
+                  type: boolean
+                  constraints:
+                    nullable: true
+              - column:
+                  name: last_block_date
+                  type: timestamp
+              - column:
+                  name: updated_at
+                  type: timestamp
+                  constraints:
+                    nullable: false
+              - column:
+                  name: owner_id
+                  type: bigint
+                  constraints:
+                    nullable: true
+
+
+        - addForeignKeyConstraint:
+            baseTableName: cards
+            baseColumnNames: owner_id
+            referencedTableName: card_owners
+            referencedColumnNames: id
+            constraintName: fk_cards_owners
+            onDelete: CASCADE
+            onInsert: CASCADE

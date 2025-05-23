@@ -1,0 +1,45 @@
+databaseChangeLog:
+  - changeSet:
+      author: ilkin
+      id: create
+      changes:
+        - createTable:
+            tableName: card_owners
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+              - column:
+                  name: fin
+                  type: VARCHAR(255)
+              - column:
+                  name: legal_id
+                  type: VARCHAR(255)
+              - column:
+                  name: surname
+                  type: VARCHAR(255)
+              - column:
+                  name: father_name
+                  type: VARCHAR(255)
+              - column:
+                  name: nationality
+                  type: VARCHAR(255)
+              - column:
+                  name: age
+                  type: INTEGER
+              - column:
+                  name: email
+                  type: VARCHAR(255)
+              - column:
+                  name: created_at
+                  type: TIMESTAMP
+              - column:
+                  name: updated_at
+                  type: TIMESTAMP

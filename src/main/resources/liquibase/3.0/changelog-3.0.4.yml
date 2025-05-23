@@ -1,0 +1,13 @@
+databaseChangeLog:
+  - changeSet:
+      id: added new column in guests table
+      author: ilkin
+      changes:
+        - addColumn:
+            tableName: guests
+            columns:
+              - column:
+                  name: legal_id
+                  type: varchar(50)
+                  constraints:
+                    nullable: false

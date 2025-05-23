@@ -1,0 +1,43 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: ilkin
+      changes:
+        - createTable:
+            tableName: tickets
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: guest_id
+                  type: bigint
+                  constraints:
+                    nullable: true
+              - column:
+                  name: travel_id
+                  type: bigint
+                  constraints:
+                    nullable: true
+
+        - addForeignKeyConstraint:
+            baseTableName: tickets
+            baseColumnNames: guest_id
+            constraintName: fk_tickets_guest
+            referencedTableName: guests
+            referencedColumnNames: id
+            onDelete: CASCADE
+            onInsert: CASCADE
+
+        - addForeignKeyConstraint:
+            baseTableName: tickets
+            baseColumnNames: travel_id
+            constraintName: fk_tickets_travel
+            referencedTableName: travels
+            referencedColumnNames: id
+            onDelete: CASCADE
+            onInsert: CASCADE

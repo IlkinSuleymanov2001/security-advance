@@ -1,0 +1,43 @@
+databaseChangeLog:
+  - changeSet:
+      id: create user table
+      author: ilkin
+      changes:
+        - createTable:
+            tableName: users
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_at
+                  type: timestamp
+              - column:
+                  name: updated_at
+                  type: timestamp
+              - column:
+                  name: security_user_id
+                  type: BIGINT
+                  constraints:
+                    nullable: true
+              - addForeignKeyConstraint:
+                  baseColumnNames: security_user_id
+                  baseTableName: users
+                  constraintName: fk_user_security_user_entity
+                  deferrable: true
+                  initiallyDeferred: true
+                  onDelete: RESTRICT
+                  onUpdate: RESTRICT
+                  referencedColumnNames: id
+                  referencedTableName: security_users
+                  validate: true
+

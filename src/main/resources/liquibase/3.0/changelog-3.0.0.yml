@@ -1,0 +1,14 @@
+databaseChangeLog:
+  - changeSet:
+      id: added new column
+      author: ilkin
+      changes:
+        - addColumn:
+            tableName: users
+            columns:
+              - column:
+                  name: version
+                  type: bigint
+                  defaultValue: 0
+                  constraints:
+                    nullable: false

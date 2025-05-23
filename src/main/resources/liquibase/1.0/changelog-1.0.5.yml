@@ -1,0 +1,14 @@
+databaseChangeLog:
+  - changeSet:
+      id: added  new  activeAccount column
+      author: by ilkin
+      changes:
+        - addColumn:
+            tableName: users
+            columns:
+              - column:
+                  name: active_account
+                  type: BOOLEAN
+                  defaultValueBoolean: true
+                  constraints:
+                    nullable: false

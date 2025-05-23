@@ -1,0 +1,64 @@
+databaseChangeLog:
+  - - preConditions:
+        - runningAs:
+            username: liquibase
+  - changeSet:
+      id: create security_users table
+      author: ilkin
+      changes:
+        - createTable:
+            tableName: security_users
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: email
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: password
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: role_id
+                  type: BIGINT
+                  constraints:
+                    nullable: true
+  - changeSet:
+      id: create roles  table
+      author: ilkin
+      changes:
+        - createTable:
+            tableName: roles
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - addForeignKeyConstraint:
+                  baseColumnNames: role_id
+                  baseTableName: security_users
+                  constraintName: fk_user_security_role
+                  deferrable: true
+                  initiallyDeferred: true
+                  onDelete: RESTRICT
+                  onUpdate: RESTRICT
+                  referencedColumnNames: id
+                  referencedTableName: roles
+                  validate: true
+

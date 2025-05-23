@@ -1,0 +1,44 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-orders-table
+      author: ilkin
+      changes:
+        - createTable:
+            tableName: orders
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: order_date
+                  type: timestamp
+                  constraints:
+                    nullable: false
+              - column:
+                  name: amount
+                  type: FLOAT
+                  constraints:
+                    nullable: true
+              - column:
+                  name: status
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: user_id
+                  type: BIGINT
+                  constraints:
+                    nullable: true
+        - addForeignKeyConstraint:
+            baseTableName: orders
+            baseColumnNames: user_id
+            referencedTableName: users
+            referencedColumnNames: id
+            constraintName: oder_user_constraint
+            onDelete: CASCADE
+            onInsert: CASCADE
+
